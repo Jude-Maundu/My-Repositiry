@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colorful Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Profile Photo (Elastic Draggable) -->
+  <div id="profilePhoto">
+    <img src="your-photo.jpg" alt="Profile Photo">
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1 class="title">Hi, I'm <span>Jude</span></h1>
+    <p class="subtitle">Web Developer | AI Enthusiast | Designer</p>
+    <button onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">↓ Explore</button>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section glass">
+    <h2>About Me</h2>
+    <p>
+      I'm a passionate developer who loves building 
+      <span class="highlight">AI-powered apps</span>, crafting 
+      <span class="highlight">interactive UIs</span>, and experimenting with new tech.
+    </p>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section glass">
+   <section id="projects" class="section glass">
+  <h2>Projects</h2>
+  <div class="projects-grid">
+    <button class="project-btn" onclick="window.open('https://github.com/yourhandle/project1')">🚀 AI Assistant</button>
+    <button class="project-btn" onclick="window.open('https://github.com/yourhandle/project2')">🎵 Music Player</button>
+    <button class="project-btn" onclick="window.open('https://github.com/yourhandle/project3')">📱 Mobility App</button>
+    <button class="project-btn" onclick="window.open('https://github.com/yourhandle/project4')">📝 Journal App</button>
+    <button class="project-btn" onclick="window.open('https://github.com/yourhandle/project5')">💳 Payment App</button>
+  </div>
+</section>
+
+  <!-- AI Assistant -->
+  <section id="ai" class="section glass terminal">
+    <h2>💡 AI Assistant</h2>
+    <div id="output"></div>
+    <div id="input-line">
+      <span class="prompt">> </span>
+      <input type="text" id="commandInput" placeholder="Ask me something..." />
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="glass">
+    <h2>📬 Get in Touch</h2>
+    <p>Email: <span class="highlight">you@example.com</span></p>
+    <p>GitHub: <a href="https://github.com/yourhandle" target="_blank" class="highlight">@yourhandle</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/yourhandle" target="_blank" class="highlight">linkedin.com/in/yourhandle</a></p>
+    <p class="footer-note">© 2025 Jude. Built with 💙 & ⚡</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
