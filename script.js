@@ -24,13 +24,14 @@ async function processAI(question) {
     if (question.toLowerCase().includes("hey")) answer = "👋 Hi there! How can I help?";
     if (question.toLowerCase().includes("hi")) answer = "👋 Hi there! How can I help?";
     if (question.toLowerCase().includes("name")) answer = "My name is Jude AI. I’m here to assist you!";
-    if (question.toLowerCase().includes("skills")) answer = "⚡ I know HTML, CSS, JavaScript, Python,.";
+    if (question.toLowerCase().includes("skills")) answer = "⚡ I know HTML, CSS, JavaScript for frontend and Backend and Python for Backend Using Django ,.";
     if (question.toLowerCase().includes("portfolio")) answer = "📂 This portfolio was built with HTML, CSS, JS,";
     if (question.toLowerCase().includes("projects")) answer = "You can check out my projects on GitHub at Jude-Maundu. ";
     if (question.toLowerCase().includes("joke")) answer = "😂 Why don’t programmers like nature? Too many bugs.";
     if (question.toLowerCase().includes("help")) answer = "🤖 I’m here to assist you! What do you need help with?";
     if (question.toLowerCase().includes("education")) answer = "I did a certificate in Software Development at Emmobilis. Am currentyl doing a Diploma in Institute of Software Technology.";
-
+    if (question.toLowerCase().includes("school"))answer = "I did my KCPE at Valley View Academy, My KCSE at ST Martin Kathonzweni"
+    if (question.toLowerCase().includes("anything else")) answer= "Call Jude and Ask Him :0793945789 😁😁😁"
     await typeResponse(`Jude AI: ${answer}`, 40);
 }
 
