@@ -1,103 +1,114 @@
-const output = document.getElementById("output");
-const input = document.getElementById("commandInput");
+//  <!-- JavaScript -->
 
-input.addEventListener("keydown", function (e) {
-    if (e.key === "Enter") {
-        const question = input.value.trim();
-        if (question) {
-            processAI(question);
-            input.value = "";
-        }
-    }
-});
-
-/* Simple AI logic with typing animation */
-async function processAI(question) {
-    const userLine = document.createElement("div");
-    userLine.textContent = `> ${question}`;
-    output.appendChild(userLine);
-
-    let answer = "🤔 I’m not sure about that.";
-    
-    if (question.toLowerCase().includes("Jude")) answer = "Jude Maundu is a Software Developer with a passion for creating innovative solutions.";
-    if (question.toLowerCase().includes("hello")) answer = "👋 Hi there! How can I help?";
-    if (question.toLowerCase().includes("hey")) answer = "👋 Hi there! How can I help?";
-    if (question.toLowerCase().includes("hi")) answer = "👋 Hi there! How can I help?";
-    if (question.toLowerCase().includes("name")) answer = "My name is Jude AI. I’m here to assist you!";
-    if (question.toLowerCase().includes("skills")) answer = "⚡ I know HTML, CSS, JavaScript for frontend and Backend and Python for Backend Using Django ,.";
-    if (question.toLowerCase().includes("portfolio")) answer = "📂 This portfolio was built with HTML, CSS, JS,";
-    if (question.toLowerCase().includes("projects")) answer = "You can check out my projects on GitHub at Jude-Maundu. ";
-    if (question.toLowerCase().includes("joke")) answer = "😂 Why don’t programmers like nature? Too many bugs.";
-    if (question.toLowerCase().includes("help")) answer = "🤖 I’m here to assist you! What do you need help with?";
-    if (question.toLowerCase().includes("education")) answer = "I did a certificate in Software Development at Emmobilis. Am currentyl doing a Diploma in Institute of Software Technology.";
-    if (question.toLowerCase().includes("school"))answer = "I did my KCPE at Valley View Academy, My KCSE at ST Martin Kathonzweni"
-    if (question.toLowerCase().includes("anything else")) answer= "Call Jude and Ask Him :0793945789 😁😁😁"
-    await typeResponse(`Jude AI: ${answer}`, 40);
-}
-
-/* Typewriter Effect */
-function typeResponse(text, speed = 30) {
-    return new Promise((resolve) => {
-        let i = 0;
-        const line = document.createElement("div");
-        output.appendChild(line);
-
-        function typeChar() {
-            if (i < text.length) {
-                line.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(typeChar, speed);
-            } else {
-                resolve();
-            }
-            output.scrollTop = output.scrollHeight;
-        }
-        typeChar();
+document.addEventListener('DOMContentLoaded', () => {
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
     });
-}
 
-// ===== Scroll To Section =====
-function scrollToSection(id) {
-  document.getElementById(id).scrollIntoView({ behavior: "smooth" });
-}
+    // Mobile menu toggle
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const navMenu = document.getElementById('nav-menu');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
 
-// ===== Elastic Draggable Profile Photo =====
-const profilePhoto = document.getElementById("profilePhoto");
-const startX = profilePhoto.offsetLeft;
-const startY = profilePhoto.offsetTop;
-let offsetX, offsetY, isDragging = false;
+    hamburgerBtn.addEventListener('click', () => {
+        navMenu.classList.add('active');
+    });
+    closeMenuBtn.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+    });
+    navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+        });
+    });
 
-function onDragStart(e) {
-  isDragging = true;
-  offsetX = (e.clientX || e.touches[0].clientX) - profilePhoto.offsetLeft;
-  offsetY = (e.clientY || e.touches[0].clientY) - profilePhoto.offsetTop;
-  profilePhoto.style.transition = "none"; // Disable smooth snap while dragging
-}
+    // AI Assistant functionality
+    const aiLinkDesktop = document.getElementById('ai-link-main');
+    const aiLinkMobile = document.getElementById('ai-link');
+    const aiCard = document.getElementById('ai-card');
+    const closeAiBtn = document.getElementById('close-ai-btn');
+    const aiInput = document.getElementById('ai-input');
+    const aiSendBtn = document.getElementById('ai-send-btn');
+    const aiOutput = document.getElementById('ai-output');
 
-function onDragMove(e) {
-  if (!isDragging) return;
-  const x = (e.clientX || e.touches[0].clientX) - offsetX;
-  const y = (e.clientY || e.touches[0].clientY) - offsetY;
-  profilePhoto.style.left = x + "px";
-  profilePhoto.style.top = y + "px";
-}
+    const toggleAICard = () => {
+        aiCard.classList.toggle('scale-0');
+        aiCard.classList.toggle('opacity-0');
+    };
 
-function onDragEnd() {
-  if (!isDragging) return;
-  isDragging = false;
-  // Snap back with elastic bounce
-  profilePhoto.style.transition = "all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)";
-  profilePhoto.style.left = startX + "px";
-  profilePhoto.style.top = startY + "px";
-}
+    aiLinkDesktop.addEventListener('click', toggleAICard);
+    aiLinkMobile.addEventListener('click', toggleAICard);
+    closeAiBtn.addEventListener('click', toggleAICard);
 
-// Mouse Events
-profilePhoto.addEventListener("mousedown", onDragStart);
-document.addEventListener("mousemove", onDragMove);
-document.addEventListener("mouseup", onDragEnd);
+    const appendMessage = (sender, message) => {
+        const messageEl = document.createElement('div');
+        messageEl.classList.add('rounded-lg', 'p-3');
+        if (sender === 'user') {
+            messageEl.classList.add('bg-teal-700', 'bg-opacity-40', 'ml-auto');
+            messageEl.textContent = message;
+        } else {
+            messageEl.classList.add('bg-gray-700', 'bg-opacity-30');
+            messageEl.textContent = message;
+        }
+        aiOutput.appendChild(messageEl);
+        aiOutput.scrollTop = aiOutput.scrollHeight;
+    };
 
-// Touch Events (for mobile)
-profilePhoto.addEventListener("touchstart", onDragStart);
-document.addEventListener("touchmove", onDragMove);
-document.addEventListener("touchend", onDragEnd);
+    // === Custom AI logic (from your first script) ===
+    async function processAI(question) {
+        let answer = "🤔 I’m not sure about that.";
 
+        if (question.toLowerCase().includes("jude")) answer = "Jude Maundu is a Software Developer with a passion for creating innovative solutions.";
+        if (question.toLowerCase().includes("hello")) answer = "👋 Hi there! How can I help?";
+        if (question.toLowerCase().includes("hey")) answer = "👋 Hi there! How can I help?";
+        if (question.toLowerCase().includes("hi")) answer = "👋 Hi there! How can I help?";
+        if (question.toLowerCase().includes("name")) answer = "My name is Jude AI. I’m here to assist you!";
+        if (question.toLowerCase().includes("skills")) answer = "⚡ I know HTML, CSS, JavaScript for frontend and Backend and Python for Backend Using Django.";
+        if (question.toLowerCase().includes("portfolio")) answer = "📂 This portfolio was built with HTML, CSS, JS.";
+        if (question.toLowerCase().includes("projects")) answer = "You can check out my projects on GitHub at Jude-Maundu.";
+        if (question.toLowerCase().includes("joke")) answer = "😂 Why don’t programmers like nature? Too many bugs.";
+        if (question.toLowerCase().includes("help")) answer = "🤖 I’m here to assist you! What do you need help with?";
+        if (question.toLowerCase().includes("education")) answer = "I did a certificate in Software Development at Emmobilis. Am currently doing a Diploma at Institute of Software Technology.";
+        if (question.toLowerCase().includes("school")) answer = "I did my KCPE at Valley View Academy, My KCSE at ST Martin Kathonzweni.";
+        if (question.toLowerCase().includes("anything else")) answer = "Call Jude and Ask Him :0793945789 😁😁😁";
+
+        return answer;
+    }
+
+    const handleUserInput = async () => {
+        const userInput = aiInput.value.trim();
+        if (userInput === '') return;
+
+        appendMessage('user', userInput);
+        aiInput.value = '';
+
+        // Show "Thinking..." animation
+        const thinkingMessage = document.createElement('div');
+        thinkingMessage.classList.add('bg-gray-700', 'bg-opacity-30', 'rounded-lg', 'p-3', 'animate-pulse');
+        thinkingMessage.textContent = 'Thinking...';
+        aiOutput.appendChild(thinkingMessage);
+        aiOutput.scrollTop = aiOutput.scrollHeight;
+
+        // Process with local AI logic
+        const aiResponse = await processAI(userInput);
+
+        // Remove thinking message
+        aiOutput.removeChild(thinkingMessage);
+
+        // Append AI response
+        appendMessage('ai', aiResponse);
+    };
+
+    aiSendBtn.addEventListener('click', handleUserInput);
+    aiInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            handleUserInput();
+        }
+    });
+});
